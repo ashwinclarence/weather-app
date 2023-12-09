@@ -1,4 +1,5 @@
 .weather-container{
+    background: linear-gradient(180deg,rgb(3, 3, 232),rgb(0, 0, 45));
     background-image: url(../images/bg3.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -15,6 +16,7 @@
     text-align: center;
     border-radius: 70px;
     overflow: hidden;
+    cursor: pointer;
 }
 .weather-box-header input{
     width: 60%;
@@ -43,6 +45,17 @@
     outline: none;
     border-radius: 50%;
 }
+.weather-box-content-img{
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+.weather-box-content-img h3{
+    padding-top: 8rem;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
 .weather-box-content-img img{
     padding: 2rem;
     width: 250px;
@@ -60,7 +73,4 @@
     padding-top: 2rem;
     text-transform: uppercase;
 }
-.weather-box-content h6{
- 
-    text-transform: uppercase;
-}
+

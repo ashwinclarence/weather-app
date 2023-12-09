@@ -4,11 +4,14 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  
 }
 
 body {
   color: #ffffff;
-  background: linear-gradient(180deg, rgb(0, 115, 255), rgb(0, 38, 255));
+  /* background: linear-gradient(180deg, rgb(0, 115, 255), rgb(0, 38, 255)); */
   background-size: cover;
   background-repeat: no-repeat;
+  cursor: none;
+  transition: background-image 1s ease;
 }
