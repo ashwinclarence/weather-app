@@ -3,11 +3,15 @@ import './WeatherApp.css'
 import morningbg from '../images/bg.jpg'
 import nightbg from '../images/bg3.jpg'
 import sunnyimg from '../images/sunny.png'
-import rain from '../images/rainy.png'
+import rainy from '../images/rainy.png'
 import snow from '../images/snow.png'
-import cloudy from '../images/cloudy.png'
-import thunderrain from '../images/thunderrain.png'
-import partyclody from '../images/party cloudy.png'
+import partyclody from '../images/cloudy.png'
+import scattercloud from '../images/scartedclouds.png'
+import brokencloud from '../images/broken.png'
+import mist from '../images/mist.png'
+import thunderstrom from '../images/thunderstrom.png'
+import rain from '../images/rain.png'
+
 
 
 
@@ -69,27 +73,27 @@ function WeatherApp() {
       Humidity[0].innerHTML = data.main.humidity + " %";
       mint[0].innerHTML =Math.floor(data.main.temp_min)+ " \u00b0c";
       maxt[0].innerHTML =Math.floor(data.main.temp_max)+ " \u00b0c";
-      sunrise[0].innerHTML = "sunrise<br/>" + sunriseTime;
-      sunset[0].innerHTML = "sunset<br/>" + sunsetTime;
+      sunrise[0].innerHTML = sunriseTime;
+      sunset[0].innerHTML =  sunsetTime;
 
       if (data.weather[0].icon === "01d" || data.weather[0].icon === "01n") {
         setWicon(sunnyimg)
       } else if (data.weather[0].icon === "02d" || data.weather[0].icon === "02n") {
-        setWicon(cloudy)
-      } else if (data.weather[0].icon === "02d" || data.weather[0].icon === "02n") {
-        setWicon(cloudy)
+        setWicon(partyclody)
       } else if (data.weather[0].icon === "03d" || data.weather[0].icon === "03n") {
-        setWicon(partyclody)
+        setWicon(scattercloud)
       } else if (data.weather[0].icon === "04d" || data.weather[0].icon === "04n") {
-        setWicon(partyclody)
-      } else if (data.weather[0].icon === "05d" || data.weather[0].icon === "05n") {
-        setWicon(partyclody)
+        setWicon(brokencloud)
       } else if (data.weather[0].icon === "09d" || data.weather[0].icon === "09n") {
-        setWicon(rain)
+        setWicon(rainy)
       } else if (data.weather[0].icon === "10d" || data.weather[0].icon === "10n") {
         setWicon(rain)
+      } else if (data.weather[0].icon === "11d" || data.weather[0].icon === "11n") {
+        setWicon(thunderstrom)
       } else if (data.weather[0].icon === "13d" || data.weather[0].icon === "13n") {
         setWicon(snow)
+      } else if (data.weather[0].icon === "50d" || data.weather[0].icon === "50n") {
+        setWicon(mist)
       } else {
         setWicon(sunnyimg)
       }
@@ -112,9 +116,9 @@ function WeatherApp() {
           <i class="fa-solid fa-magnifying-glass" onClick={() => { search(); setState("") }}></i>
         </div>
         <div className="weather-box-content-img">
-          <h3 className='sunrise'>sunrise<br />----<br />am/pm</h3>
+          {/* <h3 className='sunrise'>sunrise<br />----<br />am/pm</h3> */}
           <img src={wicon} alt="" className='weather-img' />
-          <h3 className='sunset'>sunset <br />----<br />am/pm</h3>
+          {/* <h3 className='sunset'>sunset <br />----<br />am/pm</h3> */}
         </div>
         <div className="weather-box-content-temp">
           <h1 className='temperature-measure'>00 &deg;C</h1>
@@ -139,6 +143,12 @@ function WeatherApp() {
             <h6 className='mint'>00 &deg;</h6>
             <h5>Max Temp</h5>
             <h6 className='maxt'>00 &deg;</h6>
+          </div>
+          <div className="right-content">
+            <h5 title='Sunrise time in your localtime' >sunrise</h5>
+            <h6 className='sunrise' title='Sunrise time in your localtime' >00:00</h6>
+            <h5 title='Sunset time in your localtime'>sunset</h5>
+            <h6 className='sunset' title='Sunset time in your localtime'>00:00</h6>
           </div>
         </div>
       </div>
