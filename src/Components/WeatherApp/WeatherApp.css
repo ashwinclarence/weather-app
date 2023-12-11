@@ -1,6 +1,6 @@
 .weather-container{
     background: linear-gradient(180deg,rgb(3, 3, 232),rgb(0, 0, 45));
-    background-image: url(../images/bg3.jpg);
+    /* background-image: url(../images/bg3.jpg); */
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;

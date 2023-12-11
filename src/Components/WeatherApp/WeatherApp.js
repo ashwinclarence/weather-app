@@ -16,14 +16,15 @@ import rain from '../images/rain.png'
 
 
 function WeatherApp() {
-  useEffect(()=>{
+  useEffect(() => {
     console.log("call the search function");
     search();
     setState("")
-  },[])
+  }, [])
   const [state, setState] = useState(['kerala'])
   const [error, setError] = useState(null);
   const [wicon, setWicon] = useState(sunnyimg);
+  const [bg_image, setBgImage] = useState(morningbg);
   let API_KEY = "aa1710925314018ee0b5ee1619eda058";
   
   
@@ -41,8 +42,8 @@ function WeatherApp() {
 
       let data = await response.json();
 
-
-     
+      
+      
 
       const sunriseTimestamp = data.sys.sunrise;
       const sunsetTimestamp = data.sys.sunset;
@@ -71,10 +72,10 @@ function WeatherApp() {
       visibility[0].innerHTML = data.visibility / 1000 + " km";
       Pressure[0].innerHTML = data.main.pressure + " hPa";
       Humidity[0].innerHTML = data.main.humidity + " %";
-      mint[0].innerHTML =Math.floor(data.main.temp_min)+ " \u00b0c";
-      maxt[0].innerHTML =Math.floor(data.main.temp_max)+ " \u00b0c";
+      mint[0].innerHTML = Math.floor(data.main.temp_min) + " \u00b0c";
+      maxt[0].innerHTML = Math.floor(data.main.temp_max) + " \u00b0c";
       sunrise[0].innerHTML = sunriseTime;
-      sunset[0].innerHTML =  sunsetTime;
+      sunset[0].innerHTML = sunsetTime;
 
       if (data.weather[0].icon === "01d" || data.weather[0].icon === "01n") {
         setWicon(sunnyimg)
@@ -97,6 +98,11 @@ function WeatherApp() {
       } else {
         setWicon(sunnyimg)
       }
+      // const currTime = new Date().toLocaleTimeString();
+      const date = new Date();
+      setBgImage(date.getHours() <= 17 ? morningbg : nightbg);
+
+       
 
       setError(null);
     } catch (error) {
@@ -107,11 +113,12 @@ function WeatherApp() {
   }
 
   return (
-    <div className='weather-container' >
+
+    <div className='weather-container' style={{ backgroundImage: `url(${bg_image})` }} >
       <div className="weather-box">
         <div className="weather-box-header">
-          <input type="text"id='locationSearch' className='weather-location-search' placeholder='Seacrh' value={state} onChange={(e) =>{ setState(e.target.value)}} />
-          
+          <input type="text" id='locationSearch' className='weather-location-search' placeholder='Seacrh' value={state} onChange={(e) => { setState(e.target.value) }} />
+
 
           <i class="fa-solid fa-magnifying-glass" onClick={() => { search(); setState("") }}></i>
         </div>

@@ -23,11 +23,9 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "plugins": ["jquery"],
     "extends": [
       "react-app",
-      "react-app/jest",
-      "plugin:jquery/recommended"
+      "react-app/jest"
     ]
   },
   "browserslist": {
