@@ -54,6 +54,8 @@ function WeatherApp() {
       const visibility = document.getElementsByClassName("visibility");
       const Pressure = document.getElementsByClassName("Pressure");
       const Humidity = document.getElementsByClassName("Humidity");
+      const mint = document.getElementsByClassName("mint");
+      const maxt = document.getElementsByClassName("maxt");
       const sunrise = document.getElementsByClassName("sunrise");
       const sunset = document.getElementsByClassName("sunset");
 
@@ -65,6 +67,8 @@ function WeatherApp() {
       visibility[0].innerHTML = data.visibility / 1000 + " km";
       Pressure[0].innerHTML = data.main.pressure + " hPa";
       Humidity[0].innerHTML = data.main.humidity + " %";
+      mint[0].innerHTML =Math.floor(data.main.temp_min)+ " \u00b0c";
+      maxt[0].innerHTML =Math.floor(data.main.temp_max)+ " \u00b0c";
       sunrise[0].innerHTML = "sunrise<br/>" + sunriseTime;
       sunset[0].innerHTML = "sunset<br/>" + sunsetTime;
 
@@ -124,14 +128,18 @@ function WeatherApp() {
             <h5>visibility</h5>
             <h6 className='visibility'>00 km</h6>
           </div>
-          <div className="right-content">
+          <div className="middle-content">
             <h5>Pressure</h5>
             <h6 className='Pressure'>00 hPa</h6>
             <h5>Humidity</h5>
             <h6 className='Humidity'>00 %</h6>
           </div>
-
-
+          <div className="right-content">
+            <h5>Min Temp</h5>
+            <h6 className='mint'>00 &deg;</h6>
+            <h5>Max Temp</h5>
+            <h6 className='maxt'>00 &deg;</h6>
+          </div>
         </div>
       </div>
     </div>
