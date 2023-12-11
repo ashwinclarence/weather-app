@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './WeatherApp.css'
 import morningbg from '../images/bg.jpg'
 import nightbg from '../images/bg3.jpg'
@@ -12,9 +12,17 @@ import partyclody from '../images/party cloudy.png'
 
 
 function WeatherApp() {
-  const [state, setState] = useState([])
+  useEffect(()=>{
+    console.log("call the search function");
+    search();
+    setState("")
+  },[])
+  const [state, setState] = useState(['kerala'])
   const [error, setError] = useState(null);
+  const [wicon, setWicon] = useState(sunnyimg);
   let API_KEY = "aa1710925314018ee0b5ee1619eda058";
+  
+  
   const search = async () => {
     try {
       const element = document.getElementsByClassName("weather-location-search");
@@ -29,6 +37,8 @@ function WeatherApp() {
 
       let data = await response.json();
 
+
+     
 
       const sunriseTimestamp = data.sys.sunrise;
       const sunsetTimestamp = data.sys.sunset;
@@ -49,7 +59,7 @@ function WeatherApp() {
 
 
 
-      temperature[0].innerHTML = data.main.temp + " \u00b0c";
+      temperature[0].innerHTML = Math.floor(data.main.temp) + " \u00b0c";
       location[0].innerHTML = data.name;
       windspeed[0].innerHTML = data.wind.speed + " km/h";
       visibility[0].innerHTML = data.visibility / 1000 + " km";
@@ -58,23 +68,48 @@ function WeatherApp() {
       sunrise[0].innerHTML = "sunrise<br/>" + sunriseTime;
       sunset[0].innerHTML = "sunset<br/>" + sunsetTime;
 
+      if (data.weather[0].icon === "01d" || data.weather[0].icon === "01n") {
+        setWicon(sunnyimg)
+      } else if (data.weather[0].icon === "02d" || data.weather[0].icon === "02n") {
+        setWicon(cloudy)
+      } else if (data.weather[0].icon === "02d" || data.weather[0].icon === "02n") {
+        setWicon(cloudy)
+      } else if (data.weather[0].icon === "03d" || data.weather[0].icon === "03n") {
+        setWicon(partyclody)
+      } else if (data.weather[0].icon === "04d" || data.weather[0].icon === "04n") {
+        setWicon(partyclody)
+      } else if (data.weather[0].icon === "05d" || data.weather[0].icon === "05n") {
+        setWicon(partyclody)
+      } else if (data.weather[0].icon === "09d" || data.weather[0].icon === "09n") {
+        setWicon(rain)
+      } else if (data.weather[0].icon === "10d" || data.weather[0].icon === "10n") {
+        setWicon(rain)
+      } else if (data.weather[0].icon === "13d" || data.weather[0].icon === "13n") {
+        setWicon(snow)
+      } else {
+        setWicon(sunnyimg)
+      }
+
       setError(null);
-  } catch (error) {
-    console.error("Error:", error);
-    setError("An error occurred while fetching weather data. Please try again.");
-    alert("Please Check Your Input")
+    } catch (error) {
+      console.error("Error:", error);
+      setError("An error occurred while fetching weather data. Please try again.");
+      alert("Please Check Your Input")
+    }
   }
-  }
+
   return (
     <div className='weather-container' >
       <div className="weather-box">
         <div className="weather-box-header">
-          <input type="text" className='weather-location-search' placeholder='Seacrh' value={state} onChange={(e) => setState(e.target.value)} />
+          <input type="text"id='locationSearch' className='weather-location-search' placeholder='Seacrh' value={state} onChange={(e) =>{ setState(e.target.value)}} />
+          
+
           <i class="fa-solid fa-magnifying-glass" onClick={() => { search(); setState("") }}></i>
         </div>
         <div className="weather-box-content-img">
           <h3 className='sunrise'>sunrise<br />----<br />am/pm</h3>
-          <img src={sunnyimg} alt="" className='weather-img' />
+          <img src={wicon} alt="" className='weather-img' />
           <h3 className='sunset'>sunset <br />----<br />am/pm</h3>
         </div>
         <div className="weather-box-content-temp">
